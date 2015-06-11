@@ -1,39 +1,41 @@
 class Rover
- attr_accessor :x, :y, :direction
+  attr_accessor :x, :y, :direction
 
-  def initalize(x, y, direction, width = 10, length = 10)
-    @x, @y, @direction = x, y, direction
-    @width, @length = width, length
+  WIDTH = 10
+  LENGTH = 10
+  COMPASS = ['N', 'E', 'S', 'W']
+
+  def initialize(x, y, direction)
+    @x = x
+    @y = y
+    @direction = direction
   end
 
   def move
     case @direction
-     when "N"
-       @y += 1
-     when "S"
-       @y -= 1
-     when "E"
+    when "N"
       @y += 1
-     when "W"
+    when "S"
+      @y -= 1
+    when "E"
+      @y += 1
+    when "W"
       @y -= 1
     end
-   end
-
-Compass = ['N', 'E', 'S', 'W']
-
+  end
 
   def turn(n = 1)
-    pos = Compass.index(@direction)
-    @direction = Compass.rotate(n) [pos]
+    pos = COMPASS.index(@direction)
+    @direction = COMPASS.rotate(n)[pos]
   end
 
   def turn_right
-      Compass.rotate(1)
-
-  def turn_left
-      Compass.rotate(-1)
+    COMPASS.rotate(1)
   end
 
+  def turn_left
+    COMPASS.rotate(-1)
+  end
 
   def read_instruction(i)
     case i
@@ -44,31 +46,29 @@ Compass = ['N', 'E', 'S', 'W']
     when "R"
       turn_right
     end
+
     puts self
   end
 
-def to_s
-    "<Rover: #{x}"
+  def to_s
+    "<Rover: #{x}, #{y} facing #{direction}>"
+  end
+
+  def collides?(other)
+    x == other.x and y == other.y
   end
 
 end
 
 
-r = Rover.new(1,1,"N")
-puts r.to_s
-r.turn_right
-puts r
-r.turn_left
-puts r
-r.move
-puts r
+rovers = [Rover.new(1, 1, "N"), Rover.new(5, -1, "E")]
 
-r.read_instruction("M")
-r.read_instruction("L")
-r.read_instruction("R")
+rovers.each do |r|
+  input = "LMM"
 
 
-input.each_char do |c|
-
-
+  input.each_char do |c|
+    r.read_instruction(c)
+  end
+end
 
