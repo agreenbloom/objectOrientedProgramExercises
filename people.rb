@@ -1,15 +1,16 @@
 class Person
   attr_accessor :name
 
-  def initialize(name)
+  def initialize(name, display)
     @name = name
+    @greeting = greeting
   end
 
   def add(name)
     Name.new(@name)
   end
 
-  def display
+  def greeting
     "Hi, my name is #{name}"
   end
 
@@ -38,5 +39,9 @@ end
 instructor1 = Instructor.new("Chris")
 student1 = Student.new("Cristina")
 
+
 puts instructor1.teach
 puts student1.learn
+
+
+# the .teach method does not work on the student and the .learn method does not work on instructor because they are local and therefore cannot be called outside of their individual methods
