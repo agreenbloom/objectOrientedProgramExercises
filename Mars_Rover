@@ -61,7 +61,7 @@ class Rover
 end
 
 
-rovers = [Rover.new(1, 1, "N"), Rover.new(5, -1, "E")]
+rovers = [Rover.new(1, 1, "N"), Rover.new(5, 1, "E")]
 
 rovers.each do |r|
   input = "LMM"
