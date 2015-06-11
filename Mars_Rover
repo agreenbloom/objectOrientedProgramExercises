@@ -1,14 +1,15 @@
 class Rover
   attr_accessor :x, :y, :direction
 
-  WIDTH = 10
-  LENGTH = 10
+
   COMPASS = ['N', 'E', 'S', 'W']
 
-  def initialize(x, y, direction)
+  def initialize(x, y, direction, width =10 , length =10)
     @x = x
     @y = y
     @direction = direction
+    @width = width
+    @length = length
   end
 
   def move
@@ -58,6 +59,11 @@ class Rover
     x == other.x and y == other.y
   end
 
+  def in_bounds?(x, y)
+    x >= 0 and x <= @width and
+    y >= 0 and y <= @height
+  end
+
 end
 
 
@@ -71,4 +77,3 @@ rovers.each do |r|
     r.read_instruction(c)
   end
 end
-
